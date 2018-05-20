@@ -113,74 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &426228147
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 426228148}
-  - component: {fileID: 426228150}
-  - component: {fileID: 426228149}
-  m_Layer: 5
-  m_Name: ImageKusudama
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &426228148
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 426228147}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 463386534}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 700}
-  m_SizeDelta: {x: 1024, y: 1024}
-  m_Pivot: {x: 0.5, y: 1}
---- !u!114 &426228149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 426228147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 50f6b47dbac8b4de2b234329152c0c25, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &426228150
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 426228147}
 --- !u!1 &438728208
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +270,6 @@ RectTransform:
   - {fileID: 2054979877}
   - {fileID: 1164010217}
   - {fileID: 438728209}
-  - {fileID: 426228148}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -573,8 +504,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbPrefab: {fileID: 1546552087967302, guid: e6c81fbdfc81a4bd9a77dd8cbf33618a, type: 2}
+  smokePrefab: {fileID: 0}
+  kusudamaPrefab: {fileID: 0}
   canvasGame: {fileID: 463386530}
   textScore: {fileID: 1304488348}
+  imageTemple: {fileID: 0}
 --- !u!4 &975696312
 Transform:
   m_ObjectHideFlags: 0
@@ -931,6 +865,7 @@ GameObject:
   - component: {fileID: 2054979877}
   - component: {fileID: 2054979879}
   - component: {fileID: 2054979878}
+  - component: {fileID: 2054979880}
   m_Layer: 5
   m_Name: ImageTemple
   m_TagString: Untagged
@@ -989,3 +924,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2054979876}
+--- !u!114 &2054979880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2054979876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c423a1f26354230b4601f50fe67d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  templePicture:
+  - {fileID: 21300000, guid: 791946d5d2c6e4d47b91bc21fc304b8e, type: 3}
+  - {fileID: 21300000, guid: f2cba09b93db24855bbf9d23f431d5c6, type: 3}
+  - {fileID: 21300000, guid: 73a1d2812bef3423989a32ea6a1ba4ec, type: 3}

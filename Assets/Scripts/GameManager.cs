@@ -7,16 +7,22 @@ using System;
 public class GameManager : MonoBehaviour {
 
 	private const int MAX_ORB = 10;
-	private const int RESPAWNTIME = 5;
+	private const int RESPAWNTIME = 1;
+	private const int MAXLEVEL = 2;
 
 	public GameObject orbPrefab;
+	public GameObject smokePrefab;
+	public GameObject kusudamaPrefab;
 	public GameObject canvasGame;
 	public GameObject textScore;
+	public GameObject imageTemple;
 
 	private int score = 0;
-	private int nextScore = 100;
+	private int nextScore = 10;
 	private int currentOrb = 0;
+	private int templeLevel;
 	private DateTime lastDateTime;
+	private int[] nextScoreTable = new int[] (10, 10, 10);
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +31,10 @@ public class GameManager : MonoBehaviour {
 			CreateOrb ();
 		}
 		lastDateTime = DateTime.UtcNow;
+		nextScore = nextScoreTable [templeLevel];
+		imageTemple.GetComponent<TempleManager> ().SetTemplePicture (templeLevel);
+		imageTemple.GetComponent<TempleManager> ().SetTempleScale (score, nextScore);
+
 		RefreshScoreText ();
 	}
 	
@@ -62,11 +72,50 @@ public class GameManager : MonoBehaviour {
 
 	public void GetOrb(){
 		score += 1;
+
+		if(score > nextScore){
+			score = nextScore)
+		}
+
+		TempleLevelUp();
 		RefreshScoreText ();
+
+		imageTemple.GetComponent<TempleManager>().SetTempleScale(score, nextScore);
+		if((score == nextScore) && (templeLevel == MAXLEVEL)){
+			ClearEffect();
+		}
+
 		currentOrb--;
 	}
 
 	void RefreshScoreText(){
 		textScore.GetComponent<Text>().text = "徳：" + score + " / " + nextScore;
+	}
+
+	void TempleLevelUp(){
+		if (score >= nextScore) {
+			if (templeLevel < MAXLEVEL) {
+				templeLevel++;
+				score = 0;
+
+				TempleLevelUpEffect ();
+
+				nextScore = nextScoreTable (templeLevel);
+				imageTemple.GetComponent<TempleManager> ().SetTemplePicture (templeLevel);
+			}
+		}
+	}
+
+	void TempleLevelUpEffect(){
+		GameObject smoke = (GameObject)Instantiate (smokePrefab);
+		smoke.transform.SetParent (canvasGame.transform, false);
+		smoke.transform.SetSiblingIndex (2);
+
+		Destroy (smoke, 0.5f);
+	}
+
+	void ClearEffect(){
+		GameObject kusudama = (GameObject)Instantiate (kusudamaPrefab);
+		kusudama.transform.SetParent (canvasGame.transform, false);
 	}
 }
