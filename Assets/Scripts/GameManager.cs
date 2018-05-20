@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
 	private int currentOrb = 0;
 	private int templeLevel;
 	private DateTime lastDateTime;
-	private int[] nextScoreTable = new int[] (10, 10, 10);
+	private int[] nextScoreTable = new int[] {10, 10, 10};
 
 	// Use this for initialization
 	void Start () {
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour {
 		score += 1;
 
 		if(score > nextScore){
-			score = nextScore)
+			score = nextScore;
 		}
 
 		TempleLevelUp();
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour {
 
 				TempleLevelUpEffect ();
 
-				nextScore = nextScoreTable (templeLevel);
+				nextScore = nextScoreTable [templeLevel];
 				imageTemple.GetComponent<TempleManager> ().SetTemplePicture (templeLevel);
 			}
 		}
