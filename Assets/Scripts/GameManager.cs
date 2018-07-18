@@ -7,7 +7,7 @@ using System;
 public class GameManager : MonoBehaviour {
 
 	private const int MAX_ORB = 10;
-	private const int RESPAWNTIME = 1;
+	private const int RESPAWNTIME = 5;
 	private const int MAXLEVEL = 2;
 
 	public GameObject orbPrefab;
@@ -28,11 +28,21 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		currentOrb = 10;
+        score = PlayerPrefs.GetInt("SCORE", 0);
+        templeLevel = PlayerPrefs.GetInt("LEVEL", 0);
+        currentOrb = PlayerPrefs.GetInt("ORB", 10);
 		for (int i = 0; i < currentOrb; i++) {
 			CreateOrb ();
 		}
-		lastDateTime = DateTime.UtcNow;
+
+        string time = PlayerPrefs.GetString("TIME", "");
+        if(time == ""){
+            lastDateTime = DateTime.UtcNow;
+        }else{
+            long temp = Convert.ToInt64(time);
+            lastDateTime = DateTime.FromBinary(temp);
+        }
+
 		nextScore = nextScoreTable [templeLevel];
 		imageTemple.GetComponent<TempleManager> ().SetTemplePicture (templeLevel);
 		imageTemple.GetComponent<TempleManager> ().SetTempleScale (score, nextScore);
@@ -83,6 +93,7 @@ public class GameManager : MonoBehaviour {
 			orb.GetComponent<OrbManager> ().SetKind (OrbManager.ORB_KIND.PURPLE);
 			break;
 		}
+        SaveGameData();
 	}
 
 	public void GetOrb(int getScore){
@@ -111,6 +122,8 @@ public class GameManager : MonoBehaviour {
 		}
 
 		currentOrb--;
+
+        SaveGameData();
 	}
 
 	void RefreshScoreText(){
@@ -143,4 +156,13 @@ public class GameManager : MonoBehaviour {
 		GameObject kusudama = (GameObject)Instantiate (kusudamaPrefab);
 		kusudama.transform.SetParent (canvasGame.transform, false);
 	}
+
+    void SaveGameData(){
+        PlayerPrefs.SetInt("SCORE", score);
+        PlayerPrefs.SetInt("LEVEL", templeLevel);
+        PlayerPrefs.SetInt("ORB", currentOrb);
+        PlayerPrefs.SetString("TIME", lastDateTime.ToBinary().ToString());
+
+        PlayerPrefs.Save();
+    }
 }
