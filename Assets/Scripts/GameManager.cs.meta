@@ -1,11 +1,19 @@
 fileFormatVersion: 2
 guid: c31aea8c47ea649d999470745982918f
-timeCreated: 1526564787
-licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - orbPrefab: {fileID: 1546552087967302, guid: e6c81fbdfc81a4bd9a77dd8cbf33618a,
+      type: 2}
+  - smokePrefab: {fileID: 1936878523213638, guid: 331a407bde02a4b9b939ca06c83cfa3a,
+      type: 2}
+  - kusudamaPrefab: {fileID: 1831071010486624, guid: c68033cbe99ff4166a5ea157f0a1720d,
+      type: 2}
+  - canvasGame: {instanceID: 0}
+  - textScore: {instanceID: 0}
+  - imageTemple: {instanceID: 0}
+  - imageMokugyo: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
