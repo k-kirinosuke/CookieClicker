@@ -33,19 +33,36 @@ public class OrbManager : MonoBehaviour {
 			return;
 		}
 
-		switch(orbKind){
-		case ORB_KIND.BLUE:
-			gameManager.GetComponent<GameManager> ().GetOrb (1);
-			break;
-		case ORB_KIND.GREEN:
-			gameManager.GetComponent<GameManager> ().GetOrb (5);
-			break;
-		case ORB_KIND.PURPLE:
-			gameManager.GetComponent<GameManager> ().GetOrb (10);
-			break;
-		}
-		Destroy (this.gameObject);
+        RectTransform rect = GetComponent<RectTransform>();
+
+        Vector3[] path = {
+            new Vector3(rect.localPosition.x * 1.5f, 300f, 0f), //中間点
+            new Vector3(0f, 150f, 0f), //終点
+        };
+
+        //アニメーション作成
+        rect.DOLocalPath(path, 0.5f, PathType.CatmullRom).SetEase(Ease.OutQuad).OnComplete(AddOrbPoint);
+
+        //サイズ変更
+        rect.DOScale(
+            new Vector3(0.5f, 0.5f, 0f), 0.5f);
+
 	}
+
+    void AddOrbPoint(){
+        switch(orbKind){
+            case ORB_KIND.BLUE:
+                gameManager.GetComponent<GameManager>().GetOrb(1);
+                break;
+            case ORB_KIND.GREEN:
+                gameManager.GetComponent<GameManager>().GetOrb(5);
+                break;
+            case ORB_KIND.PURPLE:
+                gameManager.GetComponent<GameManager>().GetOrb(10);
+                break;
+        }
+        Destroy(this.gameObject);
+    }
 
 	public void SetKind(ORB_KIND kind){
 		orbKind = kind;
