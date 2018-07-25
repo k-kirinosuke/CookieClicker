@@ -30,18 +30,6 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         score = PlayerPrefs.GetInt("SCORE", 0);
         templeLevel = PlayerPrefs.GetInt("LEVEL", 0);
-        currentOrb = PlayerPrefs.GetInt("ORB", 10);
-		for (int i = 0; i < currentOrb; i++) {
-			CreateOrb ();
-		}
-
-        string time = PlayerPrefs.GetString("TIME", "");
-        if(time == ""){
-            lastDateTime = DateTime.UtcNow;
-        }else{
-            long temp = Convert.ToInt64(time);
-            lastDateTime = DateTime.FromBinary(temp);
-        }
 
 		nextScore = nextScoreTable [templeLevel];
 		imageTemple.GetComponent<TempleManager> ().SetTemplePicture (templeLevel);
@@ -52,16 +40,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (currentOrb < MAX_ORB) {
-			TimeSpan timeSpan = DateTime.UtcNow - lastDateTime;
-
-			if (timeSpan >= TimeSpan.FromSeconds (RESPAWNTIME)) {
-				while (timeSpan >= TimeSpan.FromSeconds (RESPAWNTIME)) {
-					CreateNewOrb ();
-					timeSpan -= TimeSpan.FromSeconds (RESPAWNTIME);
-				}
-			}
-		}
+		
 	}
 
 	public void CreateNewOrb(){
