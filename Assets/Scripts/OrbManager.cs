@@ -28,6 +28,7 @@ public class OrbManager : MonoBehaviour {
 		
 	}
 
+    public void FlyOrb(){         RectTransform rect = GetComponent<RectTransform>();          Vector3[] path = {             new Vector3(rect.localPosition.x * 4.0f, 300f, 0f), //中間点             new Vector3(0f, 250f, 0f), //終点         } ;          //アニメーション作成         rect.DOLocalPath(path, 0.5f, PathType.CatmullRom).SetEase(Ease.OutQuad).OnComplete(AddOrbPoint);          //サイズ変更         rect.DOScale(new Vector3(0.5f, 0.5f, 0f), 0.5f);  } 
 	
 
     void AddOrbPoint(){
