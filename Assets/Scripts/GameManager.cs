@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
 	private int templeLevel;
 	private DateTime lastDateTime;
 	private int[] nextScoreTable = new int[] {10, 100, 1000};
+    private int numOfOrb;
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +41,10 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        while(numOfOrb > 0){
+            Invoke("CreateNewOrb", 0.1f * numOfOrb);
+            numOfOrb--;
+        }
 	}
 
 	public void CreateNewOrb(){
