@@ -6,8 +6,8 @@ using System;
 
 public class GameManager : MonoBehaviour {
 
-	private const int MAX_ORB = 10;
-	private const int RESPAWNTIME = 5;
+	private const int MAX_ORB = 30;
+	private const int RESPAWNTIME = 30;
 	private const int MAXLEVEL = 2;
 
 	public GameObject orbPrefab;
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
 	private int currentOrb = 0;
 	private int templeLevel;
 	private DateTime lastDateTime;
-	private int[] nextScoreTable = new int[] {10, 100, 1000};
+	private int[] nextScoreTable = new int[] {100, 1000, 10000};
     private int numOfOrb;
 
 	// Use this for initialization
@@ -159,4 +159,31 @@ public class GameManager : MonoBehaviour {
 
         PlayerPrefs.Save();
     }
+
+	private void OnApplicationPause(bool pauseStatus)
+	{
+        if(pauseStatus){
+            
+        }else{
+            string time = PlayerPrefs.GetString("TIME", "");
+            if(time == ""){
+                lastDateTime = DateTime.UtcNow;
+            }else{
+                long temp = Convert.ToInt64(time);
+                lastDateTime = DateTime.FromBinary(temp);
+            }
+
+            numOfOrb = 0;
+            TimeSpan timeSpan = DateTime.UtcNow - lastDateTime;
+            if(timeSpan > TimeSpan.FromSeconds(RESPAWNTIME)){
+                while(timeSpan > TimeSpan.FromSeconds(RESPAWNTIME)){
+                    if(numOfOrb < MAX_ORB){
+                        numOfOrb++;
+                    }
+                    timeSpan -= TimeSpan.FromSeconds(RESPAWNTIME);
+                }
+            }
+        }
+	}
+
 }
